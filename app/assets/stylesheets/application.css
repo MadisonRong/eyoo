@@ -12,4 +12,12 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap.min
+ *= require jquery-ui-1.10.3.full.min
+ *= require datepicker
+ *= require ui.jqgrid
+ *= require ace.min
+ *= require ace-rtl.min
+ *= require ace-skins.min
+ *= require font-awesome.min
  */

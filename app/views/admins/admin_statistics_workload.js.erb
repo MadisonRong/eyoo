@@ -1,0 +1,108 @@
+$(".main-content").html("")
+$(".main-content").html("<%= escape_javascript(render('admins/admin_statistics_workload')) %>")
+$(function () {
+    charts1=new Highcharts.Chart({
+        chart: {
+            renderTo: 'container1',
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: '审核商家工作量统计'
+        },
+        credits: {
+        	enabled: false
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+            	   events:{
+            	   	click: function(e){
+            	   		console.log(e.point.id)
+            	   	}
+            	   },
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '审核商家工作量统计'
+        }]
+    });
+		//异步请求数据
+                $.ajax({
+                    type:"GET",
+                    url:'<%= admins_jsonworkload_path+"?type=0" %>',
+                    success:function(data){
+                        //设置数据
+                        charts1.series[0].setData(data);  
+                    },
+                    error:function(e){
+                        console.log(e);
+                    }
+                });
+
+    charts2=new Highcharts.Chart({
+        chart: {
+        	renderTo: 'container2',
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: '审核商品工作量统计'
+        },
+        credits: {
+        	enabled: false
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+            	   events:{
+            	   	click: function(e){
+            	   		console.log(e.point.name)
+            	   	}
+            	   },
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '审核商品工作量统计'
+        }]
+    });
+
+		//异步请求数据
+                $.ajax({
+                    type:"GET",
+                    url:'<%= admins_jsonworkload_path+"?type=1" %>',
+                    success:function(data){
+                        //设置数据
+                        charts2.series[0].setData(data);  
+                    },
+                    error:function(e){
+                        console.log(e);
+                    }
+                });
+});

@@ -1,0 +1,2 @@
+class ScenicsController < ApplicationController
+end

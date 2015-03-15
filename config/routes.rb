@@ -1,7 +1,31 @@
 Rails.application.routes.draw do
   devise_for :businesses
   devise_for :admins
+  get 'admins/login' => 'admins#login'
+  get 'admins/logout' => 'sessions#destroy'
+  get 'admins/list' => 'admins#list'
+  post 'admins/update' => 'admins#admin_update'
+  get 'admins/workload' => 'admins#admin_statistics_workload'
+  get 'admins/jsonworkload' => 'admins#admin_workload_json'
+  get 'admins/jsonlist' => 'admins#jsonlist'
+  get 'admins/tickets/status_list' => 'tickets#status_list'
+  get 'admins/tickets/json_status_list' => 'tickets#json_status_list'
+  post 'admins/tickets/pass' => 'tickets#pass'
+  post 'admins/tickets/update' => 'tickets#admin_update'
+  get 'admins/businesses/status_list' => 'businesses#status_list'
+  get 'admins/businesses/json_status_list' => 'businesses#json_status_list'
+  post 'admins/businesses/pass' => 'businesses#pass'
+  post 'admins/businesses/update' => 'businesses#admin_update'
+  get 'admins/businesses/list' => 'businesses#list'
+  get 'admins/businesses/json_list' => 'businesses#json_list'
+  get 'admins/businesses/statistics' => 'businesses#statistics'
+  get 'admins/businesses/json_statistics' => 'businesses#json_statistics'
+  get 'admins/scenics/type' =>'scenics#scenics_option'
+  get '/admins/tickets/list' => 'tickets#tickets_list'
+  get '/admins/tickets/json_list' => 'tickets#tickets_json_list'
+  get '/admins/orders/statistics' => 'orders#statistics'
   resources :admins
+  resources :businesses
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

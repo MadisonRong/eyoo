@@ -1,0 +1,47 @@
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+	</script>
+
+	<ul class="breadcrumb">
+		<li>
+			<i class="icon-home home-icon"></i>
+				<a href="#">首页</a>
+			</li>
+		<li class="active">个人资料</li>
+	</ul><!-- /.breadcrumb -->
+</div>
+
+<div class="page-content">
+	<!-- <div class="center">
+		<div class="row">
+			<div class="col-xs-3">
+				个人资料
+			</div>
+		</div>
+		<div class="divider"></div>
+		<%= form_for @admin, url: admin_path(@admin), method: :patch, remote: true do |f| %>
+		<div class="row">
+			<div class="col-xs-3">
+				<%= f.label :name %>
+			</div>
+			<div class="col-xs-9">
+				<%= f.text_field :name %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<%= f.submit "保存", :disable_with => '保存ing...' %>
+			</div>
+		</div>
+		<% end %>
+		<div class="row">
+			<div class="col-xs-3">
+				修改密码
+			</div>
+		</div>
+		<div class="divider"></div>
+	</div> -->
+	<%= render 'admin_profile' %>
+</div><!-- /.page-content -->
+

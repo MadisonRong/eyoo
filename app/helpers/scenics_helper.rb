@@ -1,0 +1,2 @@
+module ScenicsHelper
+end

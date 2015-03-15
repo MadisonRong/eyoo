@@ -1,0 +1,6 @@
+$(".main-content").html("")
+$(".main-content").html("<%= escape_javascript(render('admins/admin_info')) %>")
+var menu_item=$(".nav.nav-list>li")
+$.each(menu_item, function(index, val) {
+	 $(val).removeClass('active')
+});

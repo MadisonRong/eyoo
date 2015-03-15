@@ -1,5 +1,152 @@
-<% if current_admin.has_role? :admin %>
-    hello admin
-<% else %>
-    sorry
-<% end %>
+		<div class="navbar navbar-default" id="navbar">
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="navbar-container" id="navbar-container">
+				<div class="navbar-header pull-left">
+					<a href="#" class="navbar-brand">
+						<small>
+							<i class="icon-leaf"></i>
+							e-yoo.com后台管理系统
+						</small>
+					</a><!-- /.brand -->
+				</div><!-- /.navbar-header -->
+
+				<div class="navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+						<li class="light-blue">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<img class="nav-user-photo" src="/assets/avatar2.png" alt="Jason's Photo" />
+								<span class="user-info">
+									<small>欢迎光临,</small>
+									<%= current_admin.name %>
+								</span>
+
+								<i class="icon-caret-down"></i>
+							</a>
+
+							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<!-- <li>
+									<a href="#">
+										<i class="icon-cog"></i>
+										设置
+									</a>
+								</li> -->
+
+								<li>
+									<%= link_to admin_path(current_admin), remote:true do %>
+										<i class="icon-user"></i>
+										个人资料
+									<% end %>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<%= link_to admins_logout_path do %>
+									<i class="icon-off"></i>
+										退出
+									<!-- <a href="">
+										<i class="icon-off"></i>
+										退出
+									</a> -->
+									<% end %>
+								</li>
+							</ul>
+						</li>
+					</ul><!-- /.ace-nav -->
+				</div><!-- /.navbar-header -->
+			</div><!-- /.container -->
+		</div>
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<div class="sidebar" id="sidebar">
+					<script type="text/javascript">
+						function change_active(element){
+							var menu_item=$(".nav.nav-list>li")
+							$.each(menu_item, function(index, val) {
+								 $(val).removeClass('active')
+							});
+							$(element).addClass('active')
+						}
+					</script>
+
+					<ul class="nav nav-list">
+						<li class="active">
+							<%= link_to admins_path do %>
+								<i class="icon-dashboard"></i>
+								<span class="menu-text"> 控制台 </span>
+							<% end %>
+						</li>
+
+						<!-- <li>
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-desktop"></i>
+								<span class="menu-text"> UI 组件 </span>
+								<b class="arrow icon-angle-down"></b>
+							</a>
+						</li> -->
+
+						<% if current_admin.has_role? :system_admin %>
+							<li onClick="change_active(this)">
+								<%= link_to "#" , remote: true do %>
+									<i class="icon-desktop"></i>
+									<span class="menu-text"> 系统管理员 </span>
+								<% end %>
+							</li>
+						<% elsif current_admin.has_role? :platform_admin %>
+						  <li onClick="change_active(this)">
+								<%= link_to "#" , remote: true do %>
+									<i class="icon-desktop"></i>
+									<span class="menu-text"> 平台管理员 </span>
+								<% end %>
+							</li>
+						<% else %>
+						  <li onClick="change_active(this)">
+								<%= link_to "#" , remote: true do %>
+									<i class="icon-desktop"></i>
+									<span class="menu-text"> 商家 </span>
+								<% end %>
+							</li>
+						<% end %>
+						
+					</ul><!-- /.nav-list -->
+
+					<div class="sidebar-collapse" id="sidebar-collapse">
+						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+					</div>
+
+					<script type="text/javascript">
+						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+					</script>
+				</div>
+
+				<div class="main-content">
+					<%= render 'index_content' %>
+				</div><!-- /.main-content -->
+
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<script src="/assets/jquery-ui-1.10.3.custom.min.js"></script>
+
+		<!-- ace scripts -->
+
+		<script src="/assets/ace-elements.min.js"></script>
+

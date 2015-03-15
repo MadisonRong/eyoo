@@ -1,0 +1,54 @@
+<div>
+	<div class="col-xs-3">个人资料</div>
+</div>
+<hr>
+<%= form_for @admin, url: admin_path(@admin), method: :patch, remote: true do |f| %>
+<div class="profile-user-info profile-user-info-striped">
+	<div class="profile-info-row">
+		<div class="profile-info-name"> 昵称 </div>
+		<div class="profile-info-value">
+			<%= f.text_field :name %>
+		</div>
+	</div>
+	<div class="profile-info-row center">
+		<div class="profile-info-name"> 操作 </div>
+		<div class="profile-info-value">
+				<%= f.submit "保存", :disable_with => '保存ing...', class: "btn btn-primary" %>
+		</div>
+	</div>
+</div>
+<% end %>
+<div class="row"><div>&nbsp;</div></div>
+<div>
+	<div class="col-xs-3">修改密码</div>
+</div>
+<hr>
+<%= form_for @admin, url: admin_path(@admin), method: :patch, remote: true do |f| %>
+<div class="profile-user-info profile-user-info-striped">
+	<div class="profile-info-row">
+		<div class="profile-info-name"> 旧密码 </div>
+		<div class="profile-info-value">
+			<%= f.password_field :password_old %>
+		</div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> 新密码 </div>
+		<div class="profile-info-value">
+			<%= f.password_field :password_new %>
+		</div>
+	</div>
+	<div class="profile-info-row">
+		<div class="profile-info-name"> 新密码确认 </div>
+		<div class="profile-info-value">
+			<%= f.password_field :password_new_confirmation %>
+		</div>
+	</div>
+	<div class="profile-info-row center">
+		<div class="profile-info-name"> 操作 </div>
+		<div class="profile-info-value">
+				<%= f.submit "保存", :disable_with => '保存ing...', class: "btn btn-primary" %>
+		</div>
+	</div>
+</div>
+<% end %>
+<%= render 'shared/dialog' %>

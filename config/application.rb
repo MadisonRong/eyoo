@@ -22,5 +22,12 @@ module Eyoo
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Add other path to Asset Pipeline
+    #config.assets.paths << Rails.root.join("vendor", "assets", "ace", "js")
+    #config.assets.paths << Rails.root.join("vendor", "assets", "ace", "css")
+    #config.assets.paths << Rails.root.join("vendor", "assets", "ace", "images")
+    config.assets.paths << Rails.root.join("vendor", "assets", "font")
+    config.assets.paths << Rails.root.join("vendor", "assets", "avatars")
   end
 end

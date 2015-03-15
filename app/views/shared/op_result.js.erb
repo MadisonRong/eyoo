@@ -1,0 +1,11 @@
+<% if @result %>
+	$(".modal-body>p").html("")
+	$(".modal-body>p").html("操作成功")
+<% else %>
+	$(".modal-body>p").html("")
+	$(".modal-body>p").html("操作失败")
+<% end %>
+$('h4.modal-title').html("")
+$('h4.modal-title').html("操作结果")
+$('#myModal').modal('toggle')
+$('#myModal').modal('show')

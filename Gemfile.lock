@@ -38,6 +38,7 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.0)
     bcrypt (3.1.10)
+    bcrypt-ruby (3.1.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -69,6 +70,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.4.0)
+    faker (1.1.2)
+      i18n (~> 0.5)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
     globalid (0.3.3)
@@ -204,11 +207,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby (= 3.1.2)
   byebug
   cancan
   carrierwave
   coffee-rails (~> 4.1.0)
   devise
+  faker (= 1.1.2)
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
