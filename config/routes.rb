@@ -26,6 +26,10 @@ Rails.application.routes.draw do
   get '/admins/orders/statistics' => 'orders#statistics'
   resources :admins
   resources :businesses
+  namespace :api do 
+    # get 'users/register' => 'api_users#create'
+    resources :users
+  end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
