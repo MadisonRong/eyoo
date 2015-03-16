@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :businesses
   devise_for :admins
-  get 'admins/login' => 'admins#login'
-  get 'admins/logout' => 'sessions#destroy'
+  patch 'admins/update_name' => 'admins#admin_update_name'
+  patch 'admins/update_password' => 'admins#admin_update_password'
   get 'admins/list' => 'admins#list'
   post 'admins/update' => 'admins#admin_update'
   get 'admins/workload' => 'admins#admin_statistics_workload'

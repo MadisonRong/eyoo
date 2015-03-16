@@ -2,7 +2,7 @@
 	<div class="col-xs-3">个人资料</div>
 </div>
 <hr>
-<%= form_for @admin, url: admin_path(@admin), method: :patch, remote: true do |f| %>
+<%= form_for @admin, url: admins_update_name_path, method: :patch, remote: true do |f| %>
 <div class="profile-user-info profile-user-info-striped">
 	<div class="profile-info-row">
 		<div class="profile-info-name"> 昵称 </div>
@@ -23,7 +23,7 @@
 	<div class="col-xs-3">修改密码</div>
 </div>
 <hr>
-<%= form_for @admin, url: admin_path(@admin), method: :patch, remote: true do |f| %>
+<%= form_for @admin, url: admins_update_password_path, method: :patch, remote: true do |f| %>
 <div class="profile-user-info profile-user-info-striped">
 	<div class="profile-info-row">
 		<div class="profile-info-name"> 旧密码 </div>

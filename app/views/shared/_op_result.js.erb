@@ -3,7 +3,8 @@
 	$(".modal-body>p").html("操作成功")
 <% else %>
 	$(".modal-body>p").html("")
-	$(".modal-body>p").html("操作失败")
+	$(".modal-body>p").html("操作失败<br>")
+  $(".modal-body>p").append("<%= escape_javascript(render partial: 'shared/error_msg', object: @error_msg) %>")
 <% end %>
 $('h4.modal-title').html("")
 $('h4.modal-title').html("操作结果")

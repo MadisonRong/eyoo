@@ -44,7 +44,7 @@
                 <li class="divider"></li>
 
                 <li>
-                  <%= link_to destroy_business_session_path do %>
+                  <%= link_to destroy_business_session_path, method: :delete do %>
                   <i class="icon-off"></i>
                     退出
                   <!-- <a href="">
@@ -99,9 +99,15 @@
 
             
             <li onClick="change_active(this)">
-              <%= link_to "#" , remote: true do %>
+              <%= link_to admins_tickets_list_path , remote: true do %>
                 <i class="icon-desktop"></i>
-                <span class="menu-text"> 商家 </span>
+                <span class="menu-text"> 管理商品 </span>
+              <% end %>
+            </li>
+            <li onClick="change_active(this)">
+              <%= link_to admins_orders_statistics_path , remote: true do %>
+                <i class="icon-desktop"></i>
+                <span class="menu-text"> 统计订单 </span>
               <% end %>
             </li>
             
@@ -117,7 +123,7 @@
         </div>
 
         <div class="main-content">
-          
+          <%= render 'shared/index_content' %>
         </div><!-- /.main-content -->
 
       </div><!-- /.main-container-inner -->
