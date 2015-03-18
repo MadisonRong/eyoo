@@ -1,4 +1,4 @@
-=$(".main-content").html("")
+$(".main-content").html("")
 $(".main-content").html("<%= escape_javascript(render partial: 'shared/list', object: @title) %>")
 $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 			
@@ -22,7 +22,7 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 						{name:'price',index:'price', width:60, sorttype:"float", editable: true, sortable: true},
 						{name:'scenic',index:'scenic',width:90, editable:true, sortable: true},
 						{name:'description',index:'description',width:90, editable:true,editoptions:{size:"20",maxlength:"30"}, sortable: true},
-						{name:'ticket_type',index:'ticket_type', width:60, sorttype:"int", editable: false, sortable: true, 
+						{name:'ticket_type_id',index:'ticket_type_id', width:60, sorttype:"int", editable: false, sortable: true, 
 							formatter:function(value){
 								if (value==1) { return '漂流'; }
 								if (value==2) { return '滑雪'; }

@@ -1,0 +1,8 @@
+<!-- <form action="http://172.16.10.26:3000/businesses/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="file"><br/>
+  <input type="submit">
+</form> -->
+<%= form_tag(businesses_upload_path, methond: :post, multipart: true) do %>
+  <%= file_field_tag "file" %>
+  <%= submit_tag %>
+<% end %>

@@ -15,6 +15,7 @@ gem 'rolify'
 gem 'cancan'
 gem 'kaminari'
 gem 'carrierwave'
+gem 'mini_magick'
 gem 'faker', '1.1.2'
 gem 'by_star', :git => "git://github.com/radar/by_star"
 

@@ -1,6 +1,6 @@
 class BusinessesController < ApplicationController
-  before_action :authenticate_business!, only:[:index, :list, :json_list, :admin_update_name, :admin_update_password]
-  before_action :authenticate_admin!, only:[:status_list, :json_status_list, :pass, :admin_update, :statistics, :json_statistics]
+  before_action :authenticate_business!, only:[:index, :admin_update_name, :admin_update_password, :test, :upload]
+  before_action :authenticate_admin!, only:[:status_list, :json_status_list, :pass, :admin_update, :list, :json_list, :statistics, :json_statistics]
 
   def index;end
 
@@ -141,5 +141,17 @@ class BusinessesController < ApplicationController
     @businesses = Business.count_business
     # binding.pry
     render json: @businesses
+  end
+
+  def test
+    
+  end
+
+  def upload
+    uploader = PictureUploader.new
+    result = uploader.store!(params[:file])
+    puts uploader.url
+    # binding.pry
+    redirect_to uploader.url
   end
 end

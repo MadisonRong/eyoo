@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   get '/admins/orders/statistics' => 'orders#statistics'
   patch 'businesses/update_name' => 'businesses#admin_update_name'
   patch 'businesses/update_password' => 'businesses#admin_update_password'
+  post 'businesses/upload' => 'businesses#upload'
+  get 'businesses/test' => 'businesses#test'
   resources :admins
   resources :businesses
   namespace :api do 

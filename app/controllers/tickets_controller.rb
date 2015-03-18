@@ -64,7 +64,7 @@ class TicketsController < ApplicationController
 
   def tickets_list
     respond_to do |format|
-      format.js { render partial: 'shared/op_result' }
+      format.js
     end
   end
 
