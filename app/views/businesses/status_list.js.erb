@@ -19,10 +19,15 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 					colModel:[
 						{name:'id',index:'id', width:60, sorttype:"int", editable: false, sortable: true},
 						{name:'name',index:'name',width:90, editable:true,editoptions:{size:"20",maxlength:"30"}, sortable: true},
-						{name:'operating_license',index:'operating_license', width:60, hidden: false, editable: true, sortable: true,
-						 edittype: "image"},
+						{name:'operating_license',index:'operating_license', width:60, editable: true, sortable: true,
+						 hidden: true, edittype: "image",
+							editoptions: {size:"20",maxlength:"30",src: ""},
+							editrules: {edithidden: true}},
 						{name:'legal_person_name',index:'legal_person_name',width:90, editable:true, sortable: true},
-						{name:'legal_person_photo',index:'legal_person_photo',width:90, hidden: false, editable:true,editoptions:{size:"20",maxlength:"30"}, sortable: true},
+						{name:'legal_person_photo',index:'legal_person_photo',width:90, editable:true,sortable: true,
+					   hidden: true, edittype: "image",
+							editoptions: {size:"20",maxlength:"30",src: ""},
+							editrules: {edithidden: true}},
 						{name:'created_at',index:'created_at', width:150,editable: false, sorttype:"date", format: pickDate, sortable: true}
 					], 
 			
@@ -107,7 +112,22 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 							var form = $(e[0]);
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 							style_edit_form(form);
-						}
+						},
+						beforeInitData: function (e) {
+              var $self = $(this);
+
+              //operating_license
+              cm = $self.jqGrid("getColProp", "operating_license");
+              selRowId = $self.jqGrid("getGridParam", "selrow");
+              cellvalue=$self.jqGrid("getCell", selRowId, 2);
+              cm.editoptions.src = cellvalue;
+
+              //legal_person_photo
+              cm = $self.jqGrid("getColProp", "legal_person_photo");
+              selRowId = $self.jqGrid("getGridParam", "selrow");
+              cellvalue=$self.jqGrid("getCell", selRowId, 4);
+              cm.editoptions.src = cellvalue;
+            }
 					},
 					{
 						//delete record form
@@ -149,6 +169,10 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 						beforeShowForm: function(e){
 							var form = $(e[0]);
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+							var operating_license_value = $("#v_operating_license > span").html();
+							$("#v_operating_license > span").html("<img src=\""+operating_license_value+"\"/>");
+							var legal_person_photo_value = $("#v_legal_person_photo > span").html();
+							$("#v_legal_person_photo > span").html("<img src=\""+legal_person_photo_value+"\"/>");
 						}
 					}
 				)

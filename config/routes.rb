@@ -21,13 +21,15 @@ Rails.application.routes.draw do
   get 'admins/businesses/statistics' => 'businesses#statistics'
   get 'admins/businesses/json_statistics' => 'businesses#json_statistics'
   get 'admins/scenics/type' =>'scenics#scenics_option'
+  get 'admins/tickets/type' =>'tickets#tickets_option'
   get '/admins/tickets/list' => 'tickets#tickets_list'
   get '/admins/tickets/json_list' => 'tickets#tickets_json_list'
   get '/admins/orders/statistics' => 'orders#statistics'
+  patch 'businesses/update_name' => 'businesses#admin_update_name'
+  patch 'businesses/update_password' => 'businesses#admin_update_password'
   resources :admins
   resources :businesses
   namespace :api do 
-    # get 'users/register' => 'api_users#create'
     resources :users
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

@@ -7,21 +7,27 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 				var pager_selector = "#grid-pager";
 			
 				jQuery(grid_selector).jqGrid({
-					url: '<%= admins_commodity_json_list_url %>',
+					url: '<%= admins_tickets_json_list_url %>',
 					postData: {"type" : "1"},
 					mType: 'get',
 					datatype: 'json',
 					height: '100%',
 					autowidth: true,
 					loadui: 'block',
-					editurl: '<%= admins_commodity_update_path %>',
-					caption: "审核商品",
-					colNames:['id','门票名称','价格','景区','描述','门票类型','创建时间'],
+					editurl: '<%= admins_tickets_update_path %>',
+					caption: "管理商品",
+					colNames:['id','门票名称','价格','景区','描述','状态','门票类型','创建时间','图片'],
 					colModel:[
 						{name:'id',index:'id', width:60, sorttype:"int", editable: false, sortable: true},
 						{name:'name',index:'name',width:90, editable:true,editoptions:{size:"20",maxlength:"30"}, sortable: true},
 						{name:'price',index:'price', width:60, sorttype:"float", editable: true, sortable: true},
-						{name:'scenic',index:'scenic',width:90, editable:true, sortable: true,
+						{name:'scenic_id',index:'scenic_id',width:90, editable:true, sortable: true,
+							formatter:function(value){
+								if (value==1) { return '国内游'; }
+								if (value==2) { return '自助游'; }
+								if (value==3) { return '出境游'; }
+								if (value==4) { return '游轮'; }
+							},
 						edittype:"select",editoptions:{
 							size:"20",maxlength:"30",
 							dataUrl:"<%= admins_scenics_type_path %>",
@@ -39,18 +45,46 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 						        }
 					        },
 					        ajaxSelectOptions: { dataType: "json" }
-							},
+						},
 						{name:'description',index:'description',width:90, editable:true,editoptions:{size:"20",maxlength:"30"}, sortable: true},
-						{name:'ticket_type',index:'ticket_type', width:60, sorttype:"int", editable: false, sortable: true, 
-							formatter:function(value){
-								if (value=1) { return '漂流'; }
-								if (value=2) { return '滑雪'; }
-								if (value=3) { return '游乐场'; }
-								if (value=4) { return '温泉'; }
-								if (value=5) { return '名山胜水'; }
-								if (value=6) { return '古镇'; };
+						{name:'status',index:'status', width:60, sorttype:"int", editable: false, sortable: true,
+					    formatter:function(value){
+								if (value==0) { return '未通过'; }
+								if (value==1) { return '已通过'; }
 							}},
-						{name:'created_at',index:'created_at', width:150,editable: false, sorttype:"date",unformat: pickDate, sortable: true}
+						{name:'ticket_type_id',index:'ticket_type_id', width:60, sorttype:"int", 
+						  editable: true, sortable: true, 
+							formatter:function(value){
+								if (value==1) { return '漂流'; }
+								if (value==2) { return '滑雪'; }
+								if (value==3) { return '游乐场'; }
+								if (value==4) { return '温泉'; }
+								if (value==5) { return '名山胜水'; }
+								if (value==6) { return '古镇'; };
+							},
+							edittype:"select",editoptions:{
+							size:"20",maxlength:"30",
+							dataUrl:"<%= admins_tickets_type_path %>",
+							buildSelect: function (data) {
+								data=JSON.parse(data);
+						             var s = "<select>", i, l, item;
+						             if (data != null && data.length) {
+						                 for (i = 0, l = data.length; i < l; i++) {
+						                     item = data[i];
+						                     s += '<option value="' + item.key + '">' +
+						                             item.value + '</option>';
+						                 }
+						             }
+						             return s + "</select>";
+						        }
+					        },
+					    ajaxSelectOptions: { dataType: "json" }
+						},
+						{name:'created_at',index:'created_at', width:150,editable: false, sorttype:"date",unformat: pickDate, sortable: true},
+						{name:'picture',index:'picture', width:60, editable: true, sortable: true,
+						 hidden: true, edittype: "image",
+							editoptions: {size:"20",maxlength:"30",src: ""},
+							editrules: {edithidden: true}},
 					], 
 			
 					viewrecords : true,
@@ -123,7 +157,23 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 							var form = $(e[0]);
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 							style_edit_form(form);
-						}
+					    $("#scenic_id").height(85);
+						},
+						beforeInitData: function (e) {
+              var $self = $(this);
+
+              //operating_license
+              cm = $self.jqGrid("getColProp", "picture");
+              selRowId = $self.jqGrid("getGridParam", "selrow");
+              cellvalue=$self.jqGrid("getCell", selRowId, 8);
+              cm.editoptions.src = cellvalue;
+            },
+            afterclickPgButtons: function (e) {
+             	console.log(e);
+              var $self = $(this),
+                  selRowId = $self.jqGrid("getGridParam", "selrow");
+              $("#flag").attr("src", "http://www.ok-soft-gmbh.com/img/flag_" + selRowId + ".gif");
+            }
 					},
 					{
 						//new record form
@@ -176,6 +226,8 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 						beforeShowForm: function(e){
 							var form = $(e[0]);
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+							var v_picture_value = $("#v_picture > span").html();
+							$("#v_picture > span").html("<img src=\""+v_picture_value+"\"/>");
 						}
 					}
 				)
@@ -198,6 +250,7 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 					buttons.find('.ui-icon').remove();
 					buttons.eq(0).append('<i class="icon-chevron-left"></i>');
 					buttons.eq(1).append('<i class="icon-chevron-right"></i>');		
+
 				}
 			
 				function style_delete_form(form) {

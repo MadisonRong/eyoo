@@ -17,6 +17,7 @@ def make_admins
 		  password: "123456789",
 		  password_confirmation: "123456789"
 		)
+  system_admin.add_role(:system_admin)
 	#创建平台管理员
 	3.times do |n|
 		platform_admin=Admin.create!(
@@ -25,6 +26,7 @@ def make_admins
 		  password: "123456789",
 		  password_confirmation: "123456789"
 		)
+    platform_admin.add_role(:platform_admin)
 	end
 	#创建商家
 	99.times do |n|
@@ -38,7 +40,7 @@ def make_admins
 			legal_person_name: "Fat.new",
 			legal_person_photo: "/assets/avatar#{rand(4)+1}.png",
 			business_status: 0,
-			platform_admin_id: (n%3)+2
+			admin_id: (n%3)+2
 		)
 	end
 end
@@ -61,7 +63,7 @@ def make_scenics_and_tickets
 			description: "",
 			ticket_type_id: (n%3)+1,
 			status: 0,
-			platform_admin_id: (n%3)+2,
+			admin_id: (n%3)+2,
 			business_id: n+1
 		)
 	end

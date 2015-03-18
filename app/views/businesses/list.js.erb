@@ -175,6 +175,10 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 						beforeShowForm: function(e){
 							var form = $(e[0]);
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+							var operating_license_value = $("#v_operating_license > span").html();
+							$("#v_operating_license > span").html("<img src=\""+operating_license_value+"\"/>");
+							var legal_person_photo_value = $("#v_legal_person_photo > span").html();
+							$("#v_legal_person_photo > span").html("<img src=\""+legal_person_photo_value+"\"/>");
 						}
 					}
 				)

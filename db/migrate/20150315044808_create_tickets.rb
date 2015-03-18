@@ -8,7 +8,7 @@ class CreateTickets < ActiveRecord::Migration
       t.text     "description",  limit: 65535
       t.integer  "ticket_type_id",  limit: 4, null: false
       t.integer  "status",       limit: 4, default: 0
-      t.integer  "platform_admin_id", limit: 4
+      t.integer  "admin_id", limit: 4
       t.integer  "business_id",  limit: 4, null: false
       t.timestamps null: false
     end

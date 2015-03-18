@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150315070713) do
     t.string   "legal_person_name",      limit: 255,              null: false
     t.string   "legal_person_photo",     limit: 255,              null: false
     t.integer  "business_status",        limit: 4,   default: 0
-    t.integer  "platform_admin_id",      limit: 4
+    t.integer  "admin_id",               limit: 4
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "email",                  limit: 255, default: "", null: false
@@ -112,17 +112,17 @@ ActiveRecord::Schema.define(version: 20150315070713) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string   "name",              limit: 255,               null: false
-    t.float    "price",             limit: 24,                null: false
-    t.integer  "scenic_id",         limit: 4,                 null: false
-    t.string   "picture",           limit: 255
-    t.text     "description",       limit: 65535
-    t.integer  "ticket_type_id",    limit: 4,                 null: false
-    t.integer  "status",            limit: 4,     default: 0
-    t.integer  "platform_admin_id", limit: 4
-    t.integer  "business_id",       limit: 4,                 null: false
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.string   "name",           limit: 255,               null: false
+    t.float    "price",          limit: 24,                null: false
+    t.integer  "scenic_id",      limit: 4,                 null: false
+    t.string   "picture",        limit: 255
+    t.text     "description",    limit: 65535
+    t.integer  "ticket_type_id", limit: 4,                 null: false
+    t.integer  "status",         limit: 4,     default: 0
+    t.integer  "admin_id",       limit: 4
+    t.integer  "business_id",    limit: 4,                 null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "users", force: :cascade do |t|

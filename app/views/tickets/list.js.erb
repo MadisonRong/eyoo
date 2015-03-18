@@ -1,4 +1,4 @@
-$(".main-content").html("")
+=$(".main-content").html("")
 $(".main-content").html("<%= escape_javascript(render partial: 'shared/list', object: @title) %>")
 $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 			
@@ -7,13 +7,13 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 				var pager_selector = "#grid-pager";
 			
 				jQuery(grid_selector).jqGrid({
-					url: '<%= admins_commodity_json_status_list_url %>',
+					url: '<%= admins_tickets_json_status_list_url %>',
 					mType: 'get',
 					datatype: 'json',
 					height: '100%',
 					autowidth: true,
 					loadui: 'block',
-					editurl: '<%= admins_commodity_pass_path %>',
+					editurl: '<%= admins_tickets_pass_path %>',
 					caption: "审核商品",
 					colNames:['id','门票名称','价格','景区','描述','门票类型','创建时间'],
 					colModel:[
@@ -24,12 +24,12 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 						{name:'description',index:'description',width:90, editable:true,editoptions:{size:"20",maxlength:"30"}, sortable: true},
 						{name:'ticket_type',index:'ticket_type', width:60, sorttype:"int", editable: false, sortable: true, 
 							formatter:function(value){
-								if (value=1) { return '漂流'; }
-								if (value=2) { return '滑雪'; }
-								if (value=3) { return '游乐场'; }
-								if (value=4) { return '温泉'; }
-								if (value=5) { return '名山胜水'; }
-								if (value=6) { return '古镇'; };
+								if (value==1) { return '漂流'; }
+								if (value==2) { return '滑雪'; }
+								if (value==3) { return '游乐场'; }
+								if (value==4) { return '温泉'; }
+								if (value==5) { return '名山胜水'; }
+								if (value==6) { return '古镇'; };
 							}},
 						{name:'created_at',index:'created_at', width:150,editable: false, sorttype:"date",unformat: pickDate, sortable: true}
 					], 

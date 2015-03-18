@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/radar/by_star
+  revision: 670451fbc66bbf1e149ac20173cbe0ecb95d4fba
+  specs:
+    by_star (2.2.1)
+      activesupport
+
 GEM
   remote: https://ruby.taobao.org/
   specs:
@@ -208,6 +215,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (= 3.1.2)
+  by_star!
   byebug
   cancan
   carrierwave

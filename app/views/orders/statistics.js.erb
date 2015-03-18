@@ -1,0 +1,47 @@
+$(".main-content").html("<%= escape_javascript(render('orders/order_statistics')) %>")
+$(function(){
+
+  chart1 = new Highcharts.Chart({
+        chart: {
+          renderTo: 'container1',
+          type: 'column'
+        },
+        title: {
+            text: '统计订单'
+        },
+        credits: {
+          enabled: false
+        },
+        xAxis: {
+            categories: [ <%= @categories %> ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '订单个数'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y} 个</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '订单个数',
+            data: <%= @orders %>
+          }
+        ]
+    });
+});
+  
+

@@ -43,10 +43,11 @@ $(function () {
 		//异步请求数据
                 $.ajax({
                     type:"GET",
-                    url:'<%= admins_jsonworkload_path+"?type=0" %>',
+                    url:'<%= admins_jsonworkload_path %>',
                     success:function(data){
                         //设置数据
-                        charts1.series[0].setData(data);  
+                        charts1.series[0].setData(data.businesses);  
+                        charts2.series[0].setData(data.tickets); 
                     },
                     error:function(e){
                         console.log(e);
@@ -94,15 +95,15 @@ $(function () {
     });
 
 		//异步请求数据
-                $.ajax({
-                    type:"GET",
-                    url:'<%= admins_jsonworkload_path+"?type=1" %>',
-                    success:function(data){
-                        //设置数据
-                        charts2.series[0].setData(data);  
-                    },
-                    error:function(e){
-                        console.log(e);
-                    }
-                });
+                // $.ajax({
+                //     type:"GET",
+                //     url:'<%= admins_jsonworkload_path+"?type=1" %>',
+                //     success:function(data){
+                //         //设置数据
+                //         charts2.series[0].setData(data);  
+                //     },
+                //     error:function(e){
+                //         console.log(e);
+                //     }
+                // });
 });

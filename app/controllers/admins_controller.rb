@@ -40,8 +40,7 @@ class AdminsController < ApplicationController
     password_new_confirmation = params[:admin][:password_new_confirmation]
     unless password_old.blank? && password_new.blank? && password_new_confirmation.blank?
       if password_new == password_new_confirmation 
-        binding.pry
-        if admin.authenticate(password_old)
+        if admin.valid_password?(password_old)
           #generate new password for admin accroding to given from front-end
           admin.update_attribute(:encrypted_password, BCrypt::Password.create(password_new))
           @result = true
@@ -64,7 +63,7 @@ class AdminsController < ApplicationController
     @result = false
     case params[:oper]
     when 'edit'
-      @admin = Admin.find(params[:id])
+      admin = Admin.find(params[:id])
       #update admin name
       name = params[:name]
       unless name.nil?
@@ -73,43 +72,45 @@ class AdminsController < ApplicationController
       end
     when 'add'
       #create admin
-      @result = Admin.create!(
-      name: params[:name],
-      email: params[:email],
-      password: "123456789",
-      password_confirmation: "123456789"
-    )
+      name = params[:name]
+      email = params[:email]
+      admin = Admin.create!(
+        name: name,
+        email: email,
+        password: "123456789",
+        password_confirmation: "123456789"
+      )
+      admin.add_role(:platform_admin)
+      @result = true
     when 'del'
       #delete admin
       @result=Admin.find(params[:id]).destroy
     end
 
     respond_to do |format|
+      format.html { render nothing: true }
       format.js
     end
   end
 
-  def admin_statistics_workload
-    respond_to do |format|
-      format.js
-    end
-  end
+  def admin_statistics_workload;end
 
   def list
     @title = "管理平台管理员"
     respond_to do |format|
+      format.html { render nothing: true }
       format.js
     end
   end
 
   def jsonlist
-    @admins_hash = Admin.new.get_admins(params[:type], params[:page], params[:rows], params[:sidx], params[:sord])
+    @admins_hash = Admin.get_admins(params[:page], params[:rows], params[:sidx], params[:sord])
     render json: @admins_hash
   end
 
   def admin_workload_json
-    type = params[:type]
-    @admins = Admin.new.admin_workload_json(type)
+    @admins = Admin.admin_workload_json
+    render json: @admins
   end
 
   private
