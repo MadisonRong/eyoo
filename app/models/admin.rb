@@ -41,6 +41,7 @@ class Admin < ActiveRecord::Base
     platform_admins.each do |admin|
       result = Admin.find(admin.id).businesses.by_month.group("date(businesses.created_at)").count
       hash = Hash.new
+      hash[:y] = 0
       result.each do |_,v|
         hash[:y] = v
       end
@@ -56,6 +57,7 @@ class Admin < ActiveRecord::Base
     platform_admins.each do |admin|
       result = Admin.find(admin.id).tickets.by_month.group("date(tickets.created_at)").count
       hash = Hash.new
+      hash[:y] = 0
       result.each do |_,v|
         hash[:y] = v
       end

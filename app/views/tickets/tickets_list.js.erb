@@ -1,6 +1,7 @@
 $(".main-content").html("")
 $(".main-content").html("<%= escape_javascript(render partial: 'shared/list', object: @title) %>")
 $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
+$(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
 			
 			jQuery(function($) {
 				var grid_selector = "#grid-table";
@@ -158,6 +159,11 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 							style_edit_form(form);
 					    $("#scenic_id").height(85);
+					    $("#picture").after("<%= escape_javascript(render('shared/upload_image_form')) %>");
+					    $("#picture").click(function(){
+					    	console.log('click on image...');
+					    	$("#file").click();
+					    });
 						},
 						beforeInitData: function (e) {
               var $self = $(this);
@@ -170,9 +176,7 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
             },
             afterclickPgButtons: function (e) {
              	console.log(e);
-              var $self = $(this),
-                  selRowId = $self.jqGrid("getGridParam", "selrow");
-              $("#flag").attr("src", "http://www.ok-soft-gmbh.com/img/flag_" + selRowId + ".gif");
+             	console.log('click....');
             }
 					},
 					{

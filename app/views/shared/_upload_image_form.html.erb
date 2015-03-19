@@ -1,0 +1,96 @@
+<div style="display:none">
+<%= form_tag(businesses_upload_path, methond: :post, multipart: true, remote: true) do %>
+  <%= file_field_tag "file", onChange: "upload()" %>
+  <%= submit_tag %>
+<% end %>
+</div>
+<!-- <div style="display:none">
+<%= form_for(:attach, url: businesses_upload_path, methond: :post, multipart: true, remote: true) do |f| %>
+  <%= f.file_field "file", onChange: "upload()" %>
+  <%= f.submit %>
+<% end %>
+</div> -->
+<script>
+function upload(){
+  console.log('file field has changed....');
+  // console.log($("input[type='submit']"));
+  // console.log($("#tr_picture td").eq(1).find("form"))
+  $("input[type='submit']").click();
+  // $("#tr_picture td").eq(1).find("form").submit();
+  // ajaxFileUpload();
+}
+function ajaxFileUpload() {
+            $.ajaxFileUpload
+            (
+                {
+                    url: '<%= businesses_upload_path %>'+"?utf8="+$("input[type='hidden']").val(), //用于文件上传的服务器端请求地址
+                    secureuri: false, //一般设置为false
+                    fileElementId: 'file', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+                    dataType: 'HTML', //返回值类型 一般设置为json
+                    success: function (data, status)  //服务器成功响应处理函数
+                    {
+                        alert(data);
+                        $("#picture").attr("src", data);
+                        if (typeof (data.error) != 'undefined') {
+                            if (data.error != '') {
+                                alert(data.error);
+                            } else {
+                                alert(data.msg);
+                            }
+                        }
+                    },
+                    error: function (data, status, e)//服务器响应失败处理函数
+                    {
+                        alert(e);
+                    }
+                }
+            )
+            return false;
+        }
+$(function(){
+//   $('#uploadify').uploadify({
+//                 'uploader': '${uploadUrl}',
+//                 'formData': {'microlectureId': '${microlecture.id}'},
+//                 'swf': '${pageContext.request.contextPath}/uploadify/uploadify.swf',
+//                 'cancelImg': '${pageContext.request.contextPath}/uploadify/uploadify-cancel.png',
+//                 'folder': '${pageContext.request.contextPath}/pic/microlecture/',//您想将文件保存到的路径
+//                 'queueID': 'fileQueue',//与下面的id对应
+//                 'queueSizeLimit': 5,
+//                 'fileDesc': 'jpg文件',
+//                 'fileExt': '*.jpg', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
+//                 'auto': true,
+// //                'multi': false,
+// //                'simUploadLimit' : 2,
+//                 'buttonText': '选择文件',
+//                 'fileObjName': 'uploadify',
+//                 'method': 'POST',
+//                 'onUploadComplete': function (file, swfuploadifyQueue) {//队列中的每个文件上传完成时触发一次
+//                     alert('id: ' + file.id
+//                      + ' - 索引: ' + file.index
+//                      + ' - 文件名: ' + file.name
+//                      + ' - 文件大小: ' + file.size
+//                      + ' - 类型: ' + file.type
+//                      + ' - 创建日期: ' + file.creationdate
+//                      + ' - 修改日期: ' + file.modificationdate
+//                      + ' - 文件状态: ' + file.filestatus);
+//                 },
+//                 'onUploadError' : function(file,errorCode,errorMsg,errorString,swfuploadifyQueue) {//上传文件出错是触发（每个出错文件触发一次）
+//                     return false;
+//                 },
+//                 'onUploadSuccess' : function(file,data,response) {//上传完成时触发（每个文件触发一次）
+//                     alert( 'id: ' + file.id
+//                             + ' - 索引: ' + file.index
+//                             + ' - 文件名: ' + file.name
+//                             + ' - 文件大小: ' + file.size
+//                             + ' - 类型: ' + file.type
+//                             + ' - 创建日期: ' + file.creationdate
+//                             + ' - 修改日期: ' + file.modificationdate
+//                             + ' - 文件状态: ' + file.filestatus
+//                             + ' - 服务器端消息: ' + data
+//                             + ' - 是否上传成功: ' + response);
+//                     document.getElementById('picture').src='${picUrl}?date='+new Date();
+//                     $('#pictureUrl').val('${picUrl}');
+//                 }
+//             });
+});
+</script>
