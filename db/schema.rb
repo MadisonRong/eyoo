@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315070713) do
+ActiveRecord::Schema.define(version: 20150319095459) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at",                                      null: false
@@ -38,6 +38,23 @@ ActiveRecord::Schema.define(version: 20150315070713) do
   end
 
   add_index "admins_roles", ["admin_id", "role_id"], name: "index_admins_roles_on_admin_id_and_role_id", using: :btree
+
+  create_table "base_regions", force: :cascade do |t|
+    t.integer  "parentid",    limit: 4,   null: false
+    t.string   "name",        limit: 255, null: false
+    t.string   "code",        limit: 255, null: false
+    t.string   "parent",      limit: 255, null: false
+    t.integer  "region_type", limit: 4,   null: false
+    t.integer  "status",      limit: 4,   null: false
+    t.integer  "iscity",      limit: 4,   null: false
+    t.string   "pingyin",     limit: 255, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "base_regions", ["iscity"], name: "index_base_regions_on_iscity", using: :btree
+  add_index "base_regions", ["parentid"], name: "index_base_regions_on_parentid", using: :btree
+  add_index "base_regions", ["region_type"], name: "index_base_regions_on_region_type", using: :btree
 
   create_table "businesses", force: :cascade do |t|
     t.string   "name",                   limit: 255,              null: false
@@ -123,6 +140,8 @@ ActiveRecord::Schema.define(version: 20150315070713) do
     t.integer  "business_id",    limit: 4,                 null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.string   "province",       limit: 255
+    t.string   "city",           limit: 255
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,11 +1,11 @@
 namespace :db do
 	desc "fill some sample data"
 	task sample: :environment do
-		make_admins
-    make_users
-		make_scenics_and_tickets
-		make_scenic_and_tickets_type
-		make_orders
+		# make_admins
+  #   make_users
+		# make_scenics_and_tickets
+		# make_scenic_and_tickets_type
+		# make_orders
 	end
 end
 
