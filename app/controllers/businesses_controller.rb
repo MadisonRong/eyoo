@@ -1,7 +1,7 @@
 class BusinessesController < ApplicationController
   before_action :authenticate_business!, only:[:index, :admin_update_name, :admin_update_password, :test, :upload]
   before_action :authenticate_admin!, only:[:status_list, :json_status_list, :pass, :admin_update, :list, :json_list, :statistics, :json_statistics]
-  skip_before_filter :verify_authenticity_token, only: [:upload]
+  # skip_before_filter :verify_authenticity_token, only: [:upload]
 
   def index;end
 
@@ -150,9 +150,9 @@ class BusinessesController < ApplicationController
 
   def upload
     uploader = PictureUploader.new
-    result = uploader.store!(params[:Filename])
+    result = uploader.store!(params[:file])
     puts uploader.url
-    binding.pry
+    # binding.pry
     # render plain: uploader.url
     # respond_to do |format|
     #   format.html { redirect_to uploader.url }

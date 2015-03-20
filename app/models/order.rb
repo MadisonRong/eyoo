@@ -5,13 +5,16 @@ class Order < ActiveRecord::Base
 
   scope :count_order, ->(current_business_id){
     time = Time.new
-      binding.pry
     year_month = time.strftime("%Y-%m")
     businesses_result = Business.find(current_business_id).orders.by_month.group("date(orders.created_at)").count
     # 将查询结果转换为数组
     businesses = Array.new
     businesses_result.each do |k, v|
-      day = k.strftime("%d")
+      if k.class == DateTime
+        day = k.strftime("%d")
+      else
+        day = DateTime.parse(k).strftime("%d")
+      end
       result_hash = Hash.new
       result_hash[:day] = day
       result_hash[:mount] = v

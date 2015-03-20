@@ -159,7 +159,7 @@ $(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 							style_edit_form(form);
 					    $("#scenic_id").height(85);
-					    // $("#picture").after("<%= escape_javascript(render('shared/upload_image_form')) %>");
+					    $("#picture").after("<%= escape_javascript(render('shared/upload_image_form')) %>");
 					    $("#picture").click(function(){
 					    	console.log('click on image...');
 					    	$("#file").click();
