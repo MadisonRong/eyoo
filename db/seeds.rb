@@ -54,19 +54,6 @@ def make_scenic_and_tickets_type
   scenic_type4 = ScenicType.create!(name: "游轮")
 end
 
-def make_orders
-  990.times do |n|
-    order = Order.create!(
-      user_id: rand(99)+1,
-      money: 1,
-      ticket_id: rand(99)+1,
-      status: 0,
-      user_number: 1,
-      business_id: rand(99)+1
-    )
-  end
-end
-
 def make_users
   99.times do |n|
     name = Faker::Name.name
@@ -85,7 +72,6 @@ end
 make_admins
 make_users
 make_scenic_and_tickets_type
-make_orders
 
 # base_region seed 城市表种子数据
 BaseRegion.create!(parentid:0, name:'中国', code:'100000000', parent:'000000000', region_type:1, status:1, iscity:0, pingyin:'')
@@ -3377,6 +3363,7 @@ BaseRegion.create!(parentid:1, name:'澳门', code:'820000000', parent:'10000000
 # end of base region seed
 
 
+# scenic and ticket seed
 def make_scenics_and_tickets
   99.times do |n|
     name = Faker::Name.name
@@ -3414,5 +3401,31 @@ def make_scenics_and_tickets
   end
 end
 
-# scenic and ticket seed
 make_scenics_and_tickets
+
+# order seed
+def make_orders
+  990.times do |n|
+    business = Business.find(rand(Business.count)+1)
+    ticket_array = business.tickets
+    while ticket_array.empty?
+      business = Business.find(rand(Business.count)+1)
+      ticket_array = business.tickets
+    end
+    iterator = rand(ticket_array.size-1)
+    ticket = ticket_array[iterator]
+    while ticket.nil?
+      ticket = ticket_array[iterator]
+    end
+    order = Order.create!(
+      user_id: rand(99)+1,
+      money: 1,
+      ticket_id: ticket.id,
+      status: 0,
+      user_number: 1,
+      business_id: business.id
+    )
+  end
+end
+
+make_orders

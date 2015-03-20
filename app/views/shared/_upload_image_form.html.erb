@@ -1,8 +1,18 @@
-<div style="display:none">
+<!-- <div id="upload_div" style="display:none">
 <%= form_tag(businesses_upload_path, methond: :post, multipart: true, remote: true) do %>
   <%= file_field_tag "file", onChange: "upload()" %>
   <%= submit_tag %>
 <% end %>
+</div> -->
+<div id="upload_div" style="display:none">
+<!-- <iframe src="<%= businesses_test_path %>"> -->
+<%= form_tag(businesses_upload_path, methond: :post, multipart: true, remote: true) do %>
+<!-- <div id="fileQueue"></div>
+<input type="file" name="uploadify" id="uploadify"/> -->
+  <%= file_field_tag "file", onChange: "upload()" %>
+  <%= submit_tag %>
+<% end %>
+<!-- </iframe> -->
 </div>
 <!-- <div style="display:none">
 <%= form_for(:attach, url: businesses_upload_path, methond: :post, multipart: true, remote: true) do |f| %>
@@ -15,7 +25,7 @@ function upload(){
   console.log('file field has changed....');
   // console.log($("input[type='submit']"));
   // console.log($("#tr_picture td").eq(1).find("form"))
-  $("input[type='submit']").click();
+  // $("#upload_div>form").find("input[type=submit]").click();
   // $("#tr_picture td").eq(1).find("form").submit();
   // ajaxFileUpload();
 }
@@ -48,49 +58,48 @@ function ajaxFileUpload() {
             return false;
         }
 $(function(){
-//   $('#uploadify').uploadify({
-//                 'uploader': '${uploadUrl}',
-//                 'formData': {'microlectureId': '${microlecture.id}'},
-//                 'swf': '${pageContext.request.contextPath}/uploadify/uploadify.swf',
-//                 'cancelImg': '${pageContext.request.contextPath}/uploadify/uploadify-cancel.png',
-//                 'folder': '${pageContext.request.contextPath}/pic/microlecture/',//您想将文件保存到的路径
-//                 'queueID': 'fileQueue',//与下面的id对应
-//                 'queueSizeLimit': 5,
-//                 'fileDesc': 'jpg文件',
-//                 'fileExt': '*.jpg', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
-//                 'auto': true,
-// //                'multi': false,
-// //                'simUploadLimit' : 2,
-//                 'buttonText': '选择文件',
-//                 'fileObjName': 'uploadify',
-//                 'method': 'POST',
-//                 'onUploadComplete': function (file, swfuploadifyQueue) {//队列中的每个文件上传完成时触发一次
-//                     alert('id: ' + file.id
-//                      + ' - 索引: ' + file.index
-//                      + ' - 文件名: ' + file.name
-//                      + ' - 文件大小: ' + file.size
-//                      + ' - 类型: ' + file.type
-//                      + ' - 创建日期: ' + file.creationdate
-//                      + ' - 修改日期: ' + file.modificationdate
-//                      + ' - 文件状态: ' + file.filestatus);
-//                 },
-//                 'onUploadError' : function(file,errorCode,errorMsg,errorString,swfuploadifyQueue) {//上传文件出错是触发（每个出错文件触发一次）
-//                     return false;
-//                 },
-//                 'onUploadSuccess' : function(file,data,response) {//上传完成时触发（每个文件触发一次）
-//                     alert( 'id: ' + file.id
-//                             + ' - 索引: ' + file.index
-//                             + ' - 文件名: ' + file.name
-//                             + ' - 文件大小: ' + file.size
-//                             + ' - 类型: ' + file.type
-//                             + ' - 创建日期: ' + file.creationdate
-//                             + ' - 修改日期: ' + file.modificationdate
-//                             + ' - 文件状态: ' + file.filestatus
-//                             + ' - 服务器端消息: ' + data
-//                             + ' - 是否上传成功: ' + response);
-//                     document.getElementById('picture').src='${picUrl}?date='+new Date();
-//                     $('#pictureUrl').val('${picUrl}');
-//                 }
-//             });
+  $('#uploadify').uploadify({
+                'uploader': '<%= businesses_upload_path %>',
+                'swf': '/assets/uploadify/uploadify.swf',
+                'cancelImg': '/assets/uploadify/uploadify-cancel.png',
+                'folder': '/public/picture/',//您想将文件保存到的路径
+                'queueID': 'fileQueue',//与下面的id对应
+                'queueSizeLimit': 5,
+                'fileDesc': 'jpg文件',
+                'fileExt': '*.jpg', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
+                'auto': true,
+//                'multi': false,
+//                'simUploadLimit' : 2,
+                'buttonText': '选择文件',
+                'fileObjName': 'uploadify',
+                'method': 'POST',
+                'onUploadComplete': function (file, swfuploadifyQueue) {//队列中的每个文件上传完成时触发一次
+                    console.log('id: ' + file.id
+                     + ' - 索引: ' + file.index
+                     + ' - 文件名: ' + file.name
+                     + ' - 文件大小: ' + file.size
+                     + ' - 类型: ' + file.type
+                     + ' - 创建日期: ' + file.creationdate
+                     + ' - 修改日期: ' + file.modificationdate
+                     + ' - 文件状态: ' + file.filestatus);
+                },
+                'onUploadError' : function(file,errorCode,errorMsg,errorString,swfuploadifyQueue) {//上传文件出错是触发（每个出错文件触发一次）
+                    return false;
+                },
+                'onUploadSuccess' : function(file,data,response) {//上传完成时触发（每个文件触发一次）
+                    console.log( 'id: ' + file.id
+                            + ' - 索引: ' + file.index
+                            + ' - 文件名: ' + file.name
+                            + ' - 文件大小: ' + file.size
+                            + ' - 类型: ' + file.type
+                            + ' - 创建日期: ' + file.creationdate
+                            + ' - 修改日期: ' + file.modificationdate
+                            + ' - 文件状态: ' + file.filestatus
+                            + ' - 服务器端消息: ' + data
+                            + ' - 是否上传成功: ' + response);
+                    // document.getElementById('picture').src='${picUrl}?date='+new Date();
+                    // $('#pictureUrl').val('${picUrl}');
+                }
+            });
 });
 </script>

@@ -1,7 +1,6 @@
 $(".main-content").html("")
 $(".main-content").html("<%= escape_javascript(render partial: 'shared/list', object: @title) %>")
 $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
-$(".main-content").append("<%= render('shared/upload_image_form') %>")
 $(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
 			
 			jQuery(function($) {

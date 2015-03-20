@@ -150,13 +150,14 @@ class BusinessesController < ApplicationController
 
   def upload
     uploader = PictureUploader.new
-    result = uploader.store!(params[:file])
+    result = uploader.store!(params[:Filename])
     puts uploader.url
-    # binding.pry
+    binding.pry
     # render plain: uploader.url
-    respond_to do |format|
-      format.html { redirect_to uploader.url }
-      format.js { render plain: uploader.url }
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to uploader.url }
+    #   format.js { render plain: uploader.url }
+    # end
+    render plain: uploader.url
   end
 end

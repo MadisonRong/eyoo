@@ -51,7 +51,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   # end
   def filename
     if @filename
-      Digest::SHA1.hexdigest(original_filename) + File.extname(@filename)
+      Digest::SHA1.hexdigest(original_filename+Time.now) + File.extname(@filename)
     end
   end
 
