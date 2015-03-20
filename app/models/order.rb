@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
 
   scope :count_order, ->(current_business_id){
     time = Time.new
+      binding.pry
     year_month = time.strftime("%Y-%m")
     businesses_result = Business.find(current_business_id).orders.by_month.group("date(orders.created_at)").count
     # 将查询结果转换为数组

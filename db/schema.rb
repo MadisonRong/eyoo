@@ -14,47 +14,47 @@
 ActiveRecord::Schema.define(version: 20150319095459) do
 
   create_table "admins", force: :cascade do |t|
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.string   "name",                   limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "name"
   end
 
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
+  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
   create_table "admins_roles", id: false, force: :cascade do |t|
-    t.integer "admin_id", limit: 4
-    t.integer "role_id",  limit: 4
+    t.integer "admin_id"
+    t.integer "role_id"
   end
 
-  add_index "admins_roles", ["admin_id", "role_id"], name: "index_admins_roles_on_admin_id_and_role_id", using: :btree
+  add_index "admins_roles", ["admin_id", "role_id"], name: "index_admins_roles_on_admin_id_and_role_id"
 
   create_table "base_regions", force: :cascade do |t|
-    t.integer  "parentid",    limit: 4,   null: false
-    t.string   "name",        limit: 255, null: false
-    t.string   "code",        limit: 255, null: false
-    t.string   "parent",      limit: 255, null: false
-    t.integer  "region_type", limit: 4,   null: false
-    t.integer  "status",      limit: 4,   null: false
-    t.integer  "iscity",      limit: 4,   null: false
-    t.string   "pingyin",     limit: 255, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "parentid",    null: false
+    t.string   "name",        null: false
+    t.string   "code",        null: false
+    t.string   "parent",      null: false
+    t.integer  "region_type", null: false
+    t.integer  "status",      null: false
+    t.integer  "iscity",      null: false
+    t.string   "pingyin",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "base_regions", ["iscity"], name: "index_base_regions_on_iscity", using: :btree
-  add_index "base_regions", ["parentid"], name: "index_base_regions_on_parentid", using: :btree
-  add_index "base_regions", ["region_type"], name: "index_base_regions_on_region_type", using: :btree
+  add_index "base_regions", ["iscity"], name: "index_base_regions_on_iscity"
+  add_index "base_regions", ["parentid"], name: "index_base_regions_on_parentid"
+  add_index "base_regions", ["region_type"], name: "index_base_regions_on_region_type"
 
   create_table "businesses", force: :cascade do |t|
     t.string   "name",                   limit: 255,              null: false
@@ -65,20 +65,20 @@ ActiveRecord::Schema.define(version: 20150319095459) do
     t.integer  "admin_id",               limit: 4
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                              default: "", null: false
+    t.string   "encrypted_password",                 default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
 
-  add_index "businesses", ["email"], name: "index_businesses_on_email", unique: true, using: :btree
-  add_index "businesses", ["reset_password_token"], name: "index_businesses_on_reset_password_token", unique: true, using: :btree
+  add_index "businesses", ["email"], name: "index_businesses_on_email", unique: true
+  add_index "businesses", ["reset_password_token"], name: "index_businesses_on_reset_password_token", unique: true
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id",     limit: 4,               null: false
@@ -92,15 +92,15 @@ ActiveRecord::Schema.define(version: 20150319095459) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.integer  "resource_id",   limit: 4
-    t.string   "resource_type", limit: 255
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "scenic_types", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -140,8 +140,8 @@ ActiveRecord::Schema.define(version: 20150319095459) do
     t.integer  "business_id",    limit: 4,                 null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.string   "province",       limit: 255
-    t.string   "city",           limit: 255
+    t.string   "province"
+    t.string   "city"
   end
 
   create_table "users", force: :cascade do |t|

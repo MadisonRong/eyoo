@@ -15,7 +15,7 @@
 <!-- </iframe> -->
 </div>
 <!-- <div style="display:none">
-<%= form_for(:attach, url: businesses_upload_path, methond: :post, multipart: true, remote: true) do |f| %>
+<%= form_for(:attach, url: businesses_upload_path, methond: :post, multipart: true, remote: true, authenticity_token: true) do |f| %>
   <%= f.file_field "file", onChange: "upload()" %>
   <%= f.submit %>
 <% end %>
