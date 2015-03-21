@@ -23,6 +23,9 @@ module Eyoo
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    # Make remote forms has authenticity token
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
     # Add other path to Asset Pipeline
     #config.assets.paths << Rails.root.join("vendor", "assets", "ace", "js")
     #config.assets.paths << Rails.root.join("vendor", "assets", "ace", "css")
