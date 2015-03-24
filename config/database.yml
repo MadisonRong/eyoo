@@ -59,6 +59,6 @@ production:
   username: root
   password: root
   socket: /tmp/mysql.sock
+  # socket: /var/run/mysqld/mysqld.sock
   database: eyoo_development
-  username: eyoo
-  password: <%= ENV['EYOO_DATABASE_PASSWORD'] %>
+
