@@ -3377,13 +3377,13 @@ def make_scenics_and_tickets
     province_array = BaseRegion.get_provinces
     iterator = rand(province_array.size-1)
     business_id = Business.find(rand(Business.count)+1).id
-    province_name = province_array[iterator].name
+    province_id = province_array[iterator].id
     province = BaseRegion.find(province_array[iterator].id);
     city_array = BaseRegion.get_city(province.code)
-    city_name = ""
+    city_id = ""
     if !city_array.empty? 
       iterator = rand(city_array.size-1)
-      city_name = city_array[iterator].name
+      city_id = city_array[iterator].id
     end
     ticket = Ticket.create!(
       name: name,
@@ -3395,8 +3395,8 @@ def make_scenics_and_tickets
       status: 0,
       admin_id: (n%3)+2,
       business_id: business_id,
-      province: province_name,
-      city: city_name
+      province: province_id,
+      city: city_id
     )
   end
 end

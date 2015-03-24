@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   before_action :authenticate_admin!, only:[:status_list, :json_status_list, :pass]
   before_action :authenticate_business!, only:[:tickets_list, :tickets_json_list, :admin_update, :tickets_option]
+  # skip_before_filter :verify_authenticity_token, only: [:admin_update]
   def status_list
     @title="审核商品"
     respond_to do |format|
@@ -13,8 +14,8 @@ class TicketsController < ApplicationController
     rows=params[:rows]
     sort_column=params[:sidx]
     sort=params[:sord]
-    @commodity_hash=Ticket.get_json_status_list(current_admin.id, page, rows, sort_column, sort)
-    render json: @commodity_hash
+    @tickets_hash=Ticket.get_json_status_list(current_admin.id, page, rows, sort_column, sort)
+    # render json: @tickets_hash
   end
 
   def pass
@@ -73,8 +74,8 @@ class TicketsController < ApplicationController
     rows=params[:rows]
     sort_column=params[:sidx]
     sort=params[:sord]
-    @commodity_hash=Ticket.get_list(current_business.id, page, rows, sort_column, sort)
-    render json: @commodity_hash
+    @tickets_hash=Ticket.get_list(current_business.id, page, rows, sort_column, sort)
+    # render json: @tickets_hash
   end
 
   private

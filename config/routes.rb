@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'admins/businesses/json_list' => 'businesses#json_list'
   get 'admins/businesses/statistics' => 'businesses#statistics'
   get 'admins/businesses/json_statistics' => 'businesses#json_statistics'
+  get 'admins/scenics/select' => 'scenics#select'
   get 'admins/scenics/type' =>'scenics#scenics_option'
   get 'admins/tickets/type' =>'tickets#tickets_option'
   get '/admins/tickets/list' => 'tickets#tickets_list'

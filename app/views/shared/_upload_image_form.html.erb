@@ -1,4 +1,4 @@
-<div id="upload_div" style="display:block">
+<div id="upload_div" style="display:none">
 <%= form_tag(businesses_upload_path, methond: :post, multipart: true, remote: true, authenticity_token: true) do %>
   <%= file_field_tag "file", onChange: "upload()" %>
   <%= submit_tag %>
@@ -13,7 +13,7 @@ function ajaxFileUpload() {
             $.ajaxFileUpload
             (
                 {
-                    url: '<%= businesses_upload_path %>'+"?utf8="+$("input[type='hidden']").val(), //用于文件上传的服务器端请求地址
+                    url: '<%= businesses_upload_path %>', //用于文件上传的服务器端请求地址
                     data:{
                       "utf8": $("#upload_div>form").find("input[name='utf8']").val(),
                       "authenticity_token": $("#upload_div>form").find("input[name='authenticity_token']").val()
@@ -23,15 +23,17 @@ function ajaxFileUpload() {
                     dataType: 'HTML', //返回值类型 一般设置为json
                     success: function (data, status)  //服务器成功响应处理函数
                     {
-                        alert(data);
-                        $("#picture").attr("src", data);
-                        if (typeof (data.error) != 'undefined') {
-                            if (data.error != '') {
-                                alert(data.error);
-                            } else {
-                                alert(data.msg);
-                            }
-                        }
+                      try {
+                        console.log(data);
+                        console.log($(data));
+                        console.log($(data).html());
+                        url = $(data).html();
+                        $("#picture").attr("src", url);
+                        $("#tr_name").append('<input type="hidden" name="picture_url" value="'+url+'" />');
+                        $("#tr_name").append('<input type="hidden" name="authenticity_token" value="'+$("meta[name='csrf-token']").attr("content")+'" />');
+                      } catch (e){
+                        alert("something's wrong....");
+                      }
                     },
                     error: function (data, status, e)//服务器响应失败处理函数
                     {

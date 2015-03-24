@@ -22,25 +22,17 @@ $(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
 						{name:'id',index:'id', width:60, sorttype:"int", editable: false, sortable: true},
 						{name:'name',index:'name',width:90, editable:true,editoptions:{size:"20",maxlength:"30"}, sortable: true},
 						{name:'price',index:'price', width:60, sorttype:"float", editable: true, sortable: true},
-						{name:'scenic_id',index:'scenic_id',width:90, editable:true, sortable: true,
-							formatter:function(value){
-								if (value==1) { return '国内游'; }
-								if (value==2) { return '自助游'; }
-								if (value==3) { return '出境游'; }
-								if (value==4) { return '游轮'; }
-							},
+						{name:'scenic',index:'scenic',width:90, editable:true, sortable: true,
 						edittype:"select",editoptions:{
 							size:"20",maxlength:"30",
-							dataUrl:"<%= admins_scenics_type_path %>",
+							dataUrl:"<%= admins_scenics_select_path %>",
 							buildSelect: function (data) {
+								console.log(data);
 								data=JSON.parse(data);
-						             var s = "<select>", i, l, item;
-						             if (data != null && data.length) {
-						                 for (i = 0, l = data.length; i < l; i++) {
-						                     item = data[i];
-						                     s += '<option value="' + item.key + '">' +
-						                             item.value + '</option>';
-						                 }
+						             var s = "<select>";
+						             if (data != null) {
+						                 s += '<option value="' + data.key + '">' +
+						                             data.value + '</option>';
 						             }
 						             return s + "</select>";
 						        }
@@ -173,10 +165,6 @@ $(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
               selRowId = $self.jqGrid("getGridParam", "selrow");
               cellvalue=$self.jqGrid("getCell", selRowId, 8);
               cm.editoptions.src = cellvalue;
-            },
-            afterclickPgButtons: function (e) {
-             	console.log(e);
-             	console.log('click....');
             }
 					},
 					{
