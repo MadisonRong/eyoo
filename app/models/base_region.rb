@@ -3,7 +3,7 @@ class BaseRegion < ActiveRecord::Base
 
   # 获取省份信息
   scope :get_provinces, ->(){
-    select(:id, :name).where(region_type: 2)
+    select(:id, :name, :code).where(region_type: 2)
   }
 
   # 获取城市信息

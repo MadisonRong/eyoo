@@ -40,7 +40,7 @@ class TicketsController < ApplicationController
       ticket = Ticket.create!(
         name: params[:name],
         price: params[:price],
-        scenic_id: params[:scenic_id],
+        scenic_id: params[:scenic],
         description: params[:description],
         ticket_type_id: params[:ticket_type_id],
         business_id: current_business.id,
@@ -53,7 +53,7 @@ class TicketsController < ApplicationController
       ticket.update(
         name: params[:name],
         price: params[:price],
-        scenic_id: params[:scenic_id],
+        scenic_id: params[:scenic],
         description: params[:description],
         ticket_type_id: params[:ticket_type_id]
       )

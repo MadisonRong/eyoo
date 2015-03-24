@@ -1,7 +1,8 @@
 $(".main-content").html("")
 $(".main-content").html("<%= escape_javascript(render partial: 'shared/list', object: @title) %>")
 $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
-$(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
+$(".main-content").append("<script src='assets/ajaxfileupload.js'></script>")
+
 			
 			jQuery(function($) {
 				var grid_selector = "#grid-table";
@@ -17,7 +18,7 @@ $(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
 					loadui: 'block',
 					editurl: '<%= admins_tickets_update_path %>',
 					caption: "管理商品",
-					colNames:['id','门票名称','价格','景区','描述','状态','门票类型','创建时间','图片'],
+					colNames:['id','门票名称','价格','景区','省份','城市','描述','状态','门票类型','创建时间','图片'],
 					colModel:[
 						{name:'id',index:'id', width:60, sorttype:"int", editable: false, sortable: true},
 						{name:'name',index:'name',width:90, editable:true,editoptions:{size:"20",maxlength:"30"}, sortable: true},
@@ -27,12 +28,62 @@ $(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
 							size:"20",maxlength:"30",
 							dataUrl:"<%= admins_scenics_select_path %>",
 							buildSelect: function (data) {
-								console.log(data);
+								// console.log(data);
 								data=JSON.parse(data);
 						             var s = "<select>";
 						             if (data != null) {
 						                 s += '<option value="' + data.key + '">' +
 						                             data.value + '</option>';
+						             }
+						             return s + "</select>";
+						        }
+					        },
+					        ajaxSelectOptions: { dataType: "json" }
+						},
+						{name:'province',index:'province',width:90, editable:true, sortable: true,
+						formatter:function(cellvalue, options, rowObject){
+							// console.log("cellvalue:"+cellvalue)
+							// console.log(options)
+							// console.log("rowObject"+rowObject)
+							// console.log("province name:"+rowObject.province_name)
+							return rowObject.province_name
+						},
+						edittype:"select",editoptions:{
+							size:"20",maxlength:"30",
+							dataUrl:"<%= admins_region_provinces_path %>",
+							buildSelect: function (data) {
+								// console.log(data);
+								data=JSON.parse(data);
+						             var s = "<select>";
+						             if (data != null && data.length) {
+						                 for (var i = 0; i < data.length; i++) {
+						                 	item = data[i];
+						                 	s += '<option value="' + item.id + '">' +
+						                             item.name + '</option>';
+						                 };
+						             }
+						             return s + "</select>";
+						        }
+					        },
+					        ajaxSelectOptions: { dataType: "json" }
+						},
+						{name:'city',index:'city',width:90, editable:true, sortable: true,
+						formatter:function(cellvalue, options, rowObject){
+							return rowObject.city_name
+						},
+						edittype:"select",editoptions:{
+							size:"20",maxlength:"30",
+							dataUrl:"<%= admins_region_cities_path %>",
+							buildSelect: function (data) {
+								// console.log(data);
+								data=JSON.parse(data);
+						             var s = "<select>",i;
+						             if (data != null && data.length) {
+						                 for (var i = 0; i < data.length; i++) {
+						                 	item = data[i];
+						                 	s += '<option value="' + item.id + '">' +
+						                             item.name + '</option>';
+						                 };
 						             }
 						             return s + "</select>";
 						        }
@@ -150,12 +201,18 @@ $(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
 							var form = $(e[0]);
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 							style_edit_form(form);
-					    $("#scenic_id").height(85);
 					    $("#picture").after("<%= escape_javascript(render('shared/upload_image_form')) %>");
 					    $("#picture").click(function(){
 					    	console.log('click on image...');
 					    	$("#file").click();
 					    });
+						},
+						afterShowForm : function(e){
+					    console.log($("#province"));
+					    console.log($("#city"));
+					    console.log("after show form.....");
+							$("#province").removeClass("FormElement");
+							$("#city").removeClass("FormElement");
 						},
 						beforeInitData: function (e) {
               var $self = $(this);
@@ -163,7 +220,7 @@ $(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
               //operating_license
               cm = $self.jqGrid("getColProp", "picture");
               selRowId = $self.jqGrid("getGridParam", "selrow");
-              cellvalue=$self.jqGrid("getCell", selRowId, 8);
+              cellvalue=$self.jqGrid("getCell", selRowId, 10);
               cm.editoptions.src = cellvalue;
             }
 					},
@@ -176,6 +233,8 @@ $(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
 							var form = $(e[0]);
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 							style_edit_form(form);
+							$("#province").removeClass("FormElement");
+							$("#city").removeClass("FormElement");
 						}
 					},
 					{
@@ -242,6 +301,7 @@ $(".main-content").append("<script src='/assets/ajaxfileupload.js'></script>")
 					buttons.find('.ui-icon').remove();
 					buttons.eq(0).append('<i class="icon-chevron-left"></i>');
 					buttons.eq(1).append('<i class="icon-chevron-right"></i>');		
+
 
 				}
 			

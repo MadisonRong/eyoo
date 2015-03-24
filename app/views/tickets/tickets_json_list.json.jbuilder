@@ -6,6 +6,10 @@ json.array!(@tickets_hash[:rows]) do |ticket|
   json.name ticket.name
   json.price ticket.price
   json.scenic ticket.scenic.name
+  json.province ticket.province
+  json.province_name BaseRegion.find(ticket.province).name
+  json.city ticket.city
+  json.city_name BaseRegion.find(ticket.city).name
   json.description ticket.description
   json.status ticket.status
   json.ticket_type_id ticket.ticket_type_id

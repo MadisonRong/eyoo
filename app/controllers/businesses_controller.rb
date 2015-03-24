@@ -151,6 +151,10 @@ class BusinessesController < ApplicationController
   def upload
     @uploader = PictureUploader.new
     result = @uploader.store!(params[:file])
+    unless @uploader.url.nil?
+      ticket = Ticket.find(params[:id])
+      ticket.update_attribute(:picture, @uploader.url)
+    end
     puts @uploader.url
     # binding.pry
     render plain: @uploader.url

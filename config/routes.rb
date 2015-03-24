@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   patch 'businesses/update_password' => 'businesses#admin_update_password'
   post 'businesses/upload' => 'businesses#upload'
   get 'businesses/test' => 'businesses#test'
+  get 'admins/region/provinces' => 'base_regions#get_provinces'
+  get 'admins/region/cities' => 'base_regions#get_cities'
+  get 'admins/region/city' => 'base_regions#get_city'
   resources :admins
   resources :businesses
   namespace :api do 
