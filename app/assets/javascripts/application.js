@@ -17,3 +17,4 @@
 //= require bootstrap.min
 //= require ace.min
 //= require ace-extra.min
+Turbolinks.enableProgressBar();
