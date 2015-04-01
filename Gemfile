@@ -27,6 +27,6 @@ group :development, :test do
   gem 'sqlite3'
   gem 'spring'
   gem 'pry'
-  
+  gem 'railroady'
 end
 
