@@ -93,7 +93,8 @@ class AdminsController < ApplicationController
     end
   end
 
-  def admin_statistics_workload;end
+  def admin_statistics_workload
+  end
 
   def list
     @title = "管理平台管理员"
