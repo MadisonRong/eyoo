@@ -80,7 +80,7 @@ select date_format(created_at,'%d') day,count(*) mount from businesses
     # 将查询结果转换为数组
     businesses = Array.new
     businesses_result.each do |k, v|
-      if k.class == DateTime
+      if k.class == Date
         day = k.strftime("%d")
       else
         day = DateTime.parse(k).strftime("%d")
