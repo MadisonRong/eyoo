@@ -11,5 +11,5 @@
 /log/*
 !/log/.keep
 /tmp
-
+/config/secrets.yml
 /public/assets
