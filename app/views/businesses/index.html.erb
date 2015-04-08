@@ -17,7 +17,7 @@
           <ul class="nav ace-nav">
             <li class="light-blue">
               <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                <img class="nav-user-photo" src="/assets/avatar2.png" alt="Jason's Photo" />
+                <!-- <img class="nav-user-photo" src="/assets/avatar2.png" alt="Jason's Photo" /> -->
                 <span class="user-info">
                   <small>欢迎光临,</small>
                   <%= current_business.name %>
@@ -135,10 +135,14 @@
 
     <!-- basic scripts -->
 
-    <script src="/assets/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- <script src="/assets/jquery-ui-1.10.3.custom.min.js"></script> -->
+    <%= javascript_include_tag "jquery-ui-1.10.3.custom.min" %>
 
     <!-- ace scripts -->
 
-    <script src="/assets/ace-elements.min.js"></script>
-    <script src="/assets/uploadify/jquery.uploadify.min.js"></script>
+    <!-- <script src="/assets/ace-elements.min.js"></script> -->
+    <!-- <script src="/assets/uploadify/jquery.uploadify.min.js"></script> -->
+    <%= javascript_include_tag "ace-elements.min" %>
+    <%= javascript_include_tag "uploadify/jquery.uploadify.min" %>
+    <%= javascript_include_tag "highcharts" %>
 

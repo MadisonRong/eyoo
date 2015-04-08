@@ -15,3 +15,4 @@ Rails.application.config.assets.precompile += %w( date-time/bootstrap-datepicker
 Rails.application.config.assets.precompile += %w( jqGrid/jquery.jqGrid.min.js )
 Rails.application.config.assets.precompile += %w( jqGrid/i18n/grid.locale-en.js )
 Rails.application.config.assets.precompile += %w( highcharts.js )
+Rails.application.config.assets.precompile += %w( uploadify/jquery.uploadify.min.js )

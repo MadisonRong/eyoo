@@ -94,6 +94,9 @@ class AdminsController < ApplicationController
   end
 
   def admin_statistics_workload
+    respond_to do |format|
+      format.js
+    end
   end
 
   def list

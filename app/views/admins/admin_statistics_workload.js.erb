@@ -1,6 +1,5 @@
 $(".main-content").html("")
 $(".main-content").html("<%= escape_javascript(render('admins/admin_statistics_workload')) %>")
-<%= javascript_include_tag "highcharts" %>
 $(function () {
     charts1=new Highcharts.Chart({
         chart: {
