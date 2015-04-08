@@ -3389,7 +3389,7 @@ def make_scenics_and_tickets
       name: name,
       price: 1,
       scenic_id: scenic.id,
-      picture: "/assets/201401031712274228201_218x147_00.jpg",
+      picture: "/images/default.jpg",
       description: "",
       ticket_type_id: (n%3)+1,
       status: 0,
