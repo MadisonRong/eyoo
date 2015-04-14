@@ -3,7 +3,9 @@ class BusinessesController < ApplicationController
   before_action :authenticate_admin!, only:[:status_list, :json_status_list, :pass, :admin_update, :list, :json_list, :statistics, :json_statistics]
 
 
-  def index;end
+  def index
+    Business.update_business_email
+  end
 
   def show
     @business = Business.find(params[:id])
