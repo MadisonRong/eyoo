@@ -4,7 +4,6 @@ class BusinessesController < ApplicationController
 
 
   def index
-    Business.update_business_email
   end
 
   def show
