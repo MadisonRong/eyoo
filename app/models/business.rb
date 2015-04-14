@@ -107,7 +107,7 @@ select date_format(created_at,'%d') day,count(*) mount from businesses
     return business_array
   }
 
-  scope: update_business_email, ->{
+  scope :update_business_email, ->{
     businesses = Business.all
     iterator = 0
     businesses.each do |b|
