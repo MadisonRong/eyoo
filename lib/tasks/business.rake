@@ -10,12 +10,12 @@ def make_businesses
     name = Faker::Name.name
     last_id = Business.last.id
     bussiness=Business.create!(
-      email: "b#{n+last_id+1}@rong.com",
+      email: "b#{n+last_id+1}@eyoo.com",
       name: name,
       password: "123456789",
       password_confirmation: "123456789",
       operating_license: "/assets/user.jpg",
-      legal_person_name: "Fat.new",
+      legal_person_name: "lzq",
       legal_person_photo: "/assets/avatar#{rand(4)+1}.png",
       business_status: 0,
       admin_id: (n%3)+2

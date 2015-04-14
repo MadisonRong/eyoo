@@ -8,8 +8,8 @@
 def make_admins
   #创建系统管理员
   system_admin = Admin.create!(
-      name: "MadisonRong",
-      email: "MadisonRong@rong.com",
+      name: "Administrator",
+      email: "admin@eyoo.com",
       password: "123456789",
       password_confirmation: "123456789"
     )
@@ -17,8 +17,8 @@ def make_admins
   #创建平台管理员
   3.times do |n|
     platform_admin = Admin.create!(
-      name: "Fat.new#{n}",
-      email: "Fat.new#{n}@rong.com",
+      name: "p#{n}",
+      email: "p#{n}@eyoo.com",
       password: "123456789",
       password_confirmation: "123456789"
     )
@@ -33,7 +33,7 @@ def make_admins
       password: "123456789",
       password_confirmation: "123456789",
       operating_license: "/assets/user.jpg",
-      legal_person_name: "Fat.new",
+      legal_person_name: "lzq",
       legal_person_photo: "/assets/avatar#{rand(4)+1}.png",
       business_status: 0,
       admin_id: (n%3)+2
@@ -3370,7 +3370,7 @@ def make_scenics_and_tickets
     scenic = Scenic.create!(
       name: name,
       picture: "",
-      manager_name: "Fat.new",
+      manager_name: "lzq",
       manager_number: "123456789123456789",
       business_id: n+1
     )
@@ -3391,7 +3391,7 @@ def make_scenics_and_tickets
       scenic_id: scenic.id,
       picture: "/images/default.jpg",
       description: "",
-      ticket_type_id: (n%3)+1,
+      ticket_type_id: rand(13)+1,
       status: 0,
       admin_id: (n%3)+2,
       business_id: business_id,
