@@ -1,5 +1,5 @@
 
-    <div class="main-container">
+    <div class="main-container" style="padding-top:50px;">
       <div class="main-content">
       <!-- <div class="row center">
         <% flash.each do |key, value| %>
@@ -11,9 +11,7 @@
             <div class="login-container">
               <div class="center">
                 <h1>
-                  <i class="icon-leaf green"></i>
-                  <span class="red">Ace</span>
-                  <span class="white">Application</span>
+                  <%= image_tag("/images/white-chinese-english-300x80.png") %>
                 </h1>
                 <h4 class="blue">&copy; e-yoo.com</h4>
               </div>
@@ -26,7 +24,8 @@
                     <div class="widget-main">
                       <h4 class="header blue lighter bigger">
                         <i class="icon-coffee green"></i>
-                        Please Enter Your Information
+                        <!-- Please Enter Your Information -->
+                        请输入你的账号信息
                       </h4>
 
                       <div class="space-6"></div>
@@ -36,7 +35,7 @@
                           <label class="block clearfix">
                             <span class="block input-icon input-icon-right">
                               <!-- <input type="text" class="form-control" placeholder="Username" /> -->
-                              <%= f.text_field :email, autofocus: true, class: "form-control", placeholder: "Username" %>
+                              <%= f.text_field :email, autofocus: true, class: "form-control", placeholder: "账号" %>
                               <i class="icon-user"></i>
                             </span> 
                           </label>
@@ -44,7 +43,7 @@
                           <label class="block clearfix">
                             <span class="block input-icon input-icon-right">
                               <!-- <input type="password" class="form-control" placeholder="Password" /> -->
-                              <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+                              <%= f.password_field :password, class: "form-control", placeholder: "密码" %>
                               <i class="icon-lock"></i>
                             </span>
                           </label>
@@ -57,14 +56,14 @@
                               <!-- <input type="checkbox" class="ace" />
                               <span class="lbl"> Remember Me</span> -->
                               <%= f.check_box :remember_me, class: "ace" %>
-                              <%= f.label :remember_me, class: "lbl" %>
+                              <%= f.label "记住我", class: "lbl" %>
                             </label>
                           <% end %>
                             <!-- <button type="button" class="width-35 pull-right btn btn-sm btn-primary">
                               <i class="icon-key"></i>
                               Login
                             </button> -->
-                            <%= f.submit "Login",  class: "width-35 pull-right btn btn-sm btn-primary" %>
+                            <%= f.submit "登陆",  class: "width-35 pull-right btn btn-sm btn-primary" %>
                           </div>
 
                           <div class="space-4"></div>
@@ -76,7 +75,8 @@
                       <div>
                         <a href="#" onclick="show_box('forgot-box'); return false;" class="forgot-password-link">
                           <i class="icon-arrow-left"></i>
-                          I forgot my password
+                          <!-- I forgot my password -->
+                          忘记密码
                         </a>
                       </div>
                     </div>

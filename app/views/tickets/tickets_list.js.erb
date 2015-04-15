@@ -10,7 +10,6 @@ $(".main-content").append("<%= escape_javascript(javascript_include_tag('ajaxfil
 			
 				jQuery(grid_selector).jqGrid({
 					url: '<%= admins_tickets_json_list_url %>',
-					postData: {"type" : "1"},
 					mType: 'get',
 					datatype: 'json',
 					height: '100%',
