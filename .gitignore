@@ -13,3 +13,5 @@
 /tmp
 /config/secrets.yml
 /public/assets
+/config/database.yml
+/config/environments/production.rb
