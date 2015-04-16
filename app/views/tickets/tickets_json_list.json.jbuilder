@@ -10,7 +10,7 @@ json.array!(@tickets_hash[:rows]) do |ticket|
   json.province_name BaseRegion.find(ticket.province).name
   json.city ticket.city
   json.city_name BaseRegion.find(ticket.city).name
-  json.description ticket.description.html_safe
+  json.description sanitize(ticket.description)
   json.status ticket.status
   json.ticket_type_id ticket.ticket_type_id
   json.created_at ticket.created_at
