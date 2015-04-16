@@ -28,7 +28,7 @@ def make_admins
   99.times do |n|
     name = Faker::Name.name
     bussiness = Business.create!(
-      email: "b#{n}@rong.com",
+      email: "b#{n}@eyoo.com",
       name: name,
       password: "123456789",
       password_confirmation: "123456789",
