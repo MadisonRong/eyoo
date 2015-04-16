@@ -58,7 +58,7 @@ production:
   pool: 5
   username: root
   password: root
-  socket: /tmp/mysql.sock
-  # socket: /var/run/mysqld/mysqld.sock
+  # socket: /tmp/mysql.sock
+  socket: /var/run/mysqld/mysqld.sock
   database: eyoo_development
 
