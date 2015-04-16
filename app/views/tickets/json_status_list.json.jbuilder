@@ -1,7 +1,7 @@
 json.records @tickets_hash[:records]
 json.total @tickets_hash[:total]
 json.page @tickets_hash[:page]
-json.array!(@tickets_hash[:rows]) do |ticket|
+json.rows (@tickets_hash[:rows]) do |ticket|
   json.id ticket.id
   json.name ticket.name
   json.price ticket.price
