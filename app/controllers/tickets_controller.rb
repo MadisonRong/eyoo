@@ -45,6 +45,9 @@ class TicketsController < ApplicationController
         ticket_type_id: params[:ticket_type_id],
         business_id: current_business.id,
         admin_id: current_business.admin_id,
+        picture: "images/default.jpg",
+        province: params[:province],
+        city: params[:city],
         status: 0
       )
       @result = true unless ticket.nil?
