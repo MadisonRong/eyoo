@@ -7,9 +7,11 @@ json.rows (@tickets_hash[:rows]) do |ticket|
   json.price ticket.price
   json.scenic ticket.scenic.name
   json.province ticket.province
-  json.province_name BaseRegion.find(ticket.province).name
+  province_name = BaseRegion.find(ticket.province).name unless ticket.province.nil?
+  json.province_name province_name
   json.city ticket.city
-  json.city_name BaseRegion.find(ticket.city).name
+  city_name = BaseRegion.find(ticket.city).name unless ticket.city.nil?
+  json.city_name city_name
   json.description sanitize(ticket.description)
   json.status ticket.status
   json.ticket_type_id ticket.ticket_type_id
