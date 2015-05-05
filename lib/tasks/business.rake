@@ -6,6 +6,7 @@ namespace :db do
 end
 
 def make_businesses
+  admin_ids = get_all_admin_id
   (rand(10)+1).times do |n|
     name = Faker::Name.name
     last_id = Business.last.id
@@ -18,7 +19,17 @@ def make_businesses
       legal_person_name: "lzq",
       legal_person_photo: "/assets/avatar#{rand(4)+1}.png",
       business_status: 0,
-      admin_id: (n%3)+2
+      admin_id: admin_ids[rand(admin_ids.size)]
     )
   end
+end
+
+def get_all_admin_id
+	admins = Admin.all
+	result_array = Array.new
+	admins.each do |admin|
+             if admin.has_role? :platform_admin
+                 result_array << admin.id
+             end
+	end
 end
