@@ -14,7 +14,7 @@ def make_order
 	      ticket_id: rand(Ticket.count)+1,
 	      status: 0,
 	      user_number: 1,
-	      business_id: business_ids[rand(business_ids)]
+	      business_id: business_ids[rand(business_ids.size)]
 	    )
 	  end
 end
