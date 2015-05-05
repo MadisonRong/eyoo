@@ -27,6 +27,29 @@ class Admin < ActiveRecord::Base
     return admins_hash
   }
 
+  # 删除管理员
+  scope :del_admin, ->(id){
+    Admin.connection.transaction do
+    # 查出管理员
+    admin = Admin.includes("businesses", "tickets").find(id)
+    # 获取该管理员审核的商家和商品
+    businesses = admin.businesses
+    tickets = admin.tickets
+    # 删除管理员
+    admin.destroy
+    # 获取剩余管理员的id
+    admin_ids = self.get_all_admin_id
+    businesses.each do |b|
+      # 更新商家的管理员
+      b.update_attribute(:admin_id, admin_ids[rand(admin_ids.size)])
+    end
+    tickets.each do |t|
+      # 更新商品的管理员
+      t.update_attribute(:admin_id, admin_ids[rand(admin_ids.size)])
+    end
+  end
+  }
+
   # 统计当前月的工作量
   scope :admin_workload_json, ->(){
     # 返回结果的hash
@@ -70,4 +93,17 @@ class Admin < ActiveRecord::Base
     workload_hash[:tickets] = admins_tickets
     return workload_hash
   }
+
+# private
+  def self.get_all_admin_id
+    admins = Admin.all
+    result_array = Array.new
+    admins.each do |admin|
+      if admin.has_role? :platform_admin
+        result_array << admin.id
+      end
+    end
+  end
+
 end
+
