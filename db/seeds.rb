@@ -24,7 +24,21 @@ def make_admins
     )
     platform_admin.add_role(:platform_admin)
   end
-  #创建商家
+end
+
+def get_all_admin_id
+  admins = Admin.all
+  result_array = Array.new
+  admins.each do |admin|
+             if admin.has_role? :platform_admin
+                 result_array << admin.id
+             end
+  end
+end
+
+#创建商家
+def make_businesses
+  admin_ids = get_all_admin_id
   99.times do |n|
     name = Faker::Name.name
     bussiness = Business.create!(
@@ -32,11 +46,11 @@ def make_admins
       name: name,
       password: "123456789",
       password_confirmation: "123456789",
-      operating_license: "/assets/user.jpg",
+      operating_license: "user.jpg",
       legal_person_name: "lzq",
-      legal_person_photo: "/assets/avatar#{rand(4)+1}.png",
+      legal_person_photo: "avatar#{rand(4)+1}.png",
       business_status: 0,
-      admin_id: (n%3)+2
+      admin_id: admin_ids[rand(admin_ids.size)]
     )
   end
 end
@@ -70,6 +84,7 @@ end
 
 # seed 
 make_admins
+make_businesses
 make_users
 make_scenic_and_tickets_type
 
@@ -3362,9 +3377,18 @@ BaseRegion.create!(parentid:1, name:'澳门', code:'820000000', parent:'10000000
 
 # end of base region seed
 
+def get_all_businesses_id
+  businesses = Business.all
+  result_array = Array.new
+  businesses.each do |b|
+    result_array << b.id
+  end
+end
 
 # scenic and ticket seed
 def make_scenics_and_tickets
+  admin_ids = get_all_admin_id
+  business_ids = get_all_businesses_id
   99.times do |n|
     name = Faker::Name.name
     scenic = Scenic.create!(
@@ -3372,7 +3396,7 @@ def make_scenics_and_tickets
       picture: "",
       manager_name: "lzq",
       manager_number: "123456789123456789",
-      business_id: n+1
+      business_id: business_ids[rand(business_ids.size)]
     )
     province_array = BaseRegion.get_provinces
     iterator = rand(province_array.size-1)
@@ -3389,11 +3413,11 @@ def make_scenics_and_tickets
       name: name,
       price: 1,
       scenic_id: scenic.id,
-      picture: "/images/default.jpg",
+      picture: "default.jpg",
       description: "",
       ticket_type_id: rand(13)+1,
       status: 0,
-      admin_id: (n%3)+2,
+      admin_id: admin_ids[rand(admin_ids.size)],
       business_id: business_id,
       province: province_id,
       city: city_id
