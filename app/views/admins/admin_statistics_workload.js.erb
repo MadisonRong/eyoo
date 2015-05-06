@@ -46,8 +46,26 @@ $(function () {
                     url:'<%= admins_jsonworkload_path %>',
                     success:function(data){
                         //设置数据
-                        charts1.series[0].setData(data.businesses);  
-                        charts2.series[0].setData(data.tickets); 
+                        console.log(data.businesses);
+                        console.log(data.tickets);
+                        businesses = data.businesses
+                        for (var i = 0; i < businesses.length; i++){
+                          b = businesses[i];
+                          if (b.y != 0){
+                            charts1.series[0].setData(data.businesses);
+                            break;
+                          }
+                        }
+                        tickets = data.tickets
+                        for (var i = 0; i < tickets.length; i++) {
+                          t = tickets[i];
+                          if (t.y != 0) {
+                            charts2.series[0].setData(data.tickets);
+                            break;
+                          };
+                        };
+                        //charts1.series[0].setData(data.businesses);  
+                        //charts2.series[0].setData(data.tickets); 
                     },
                     error:function(e){
                         console.log(e);
