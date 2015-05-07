@@ -19,7 +19,7 @@
 	<div class="profile-info-row">
 		<div class="profile-info-name"> 营业执照 </div>
 		<div class="profile-info-value">
-			<img src="<%= image_path(@business.operating_license) %>" />
+			<%= image_tag(@business.operating_license, size:'800x600') %>
 		</div>
 	</div>
 	<div class="profile-info-row">
@@ -31,7 +31,7 @@
 	<div class="profile-info-row">
 		<div class="profile-info-name"> 法人照片 </div>
 		<div class="profile-info-value">
-			<img src="<%= asset_path(@business.legal_person_photo) %>" />
+			<%= image_tag(asset_path(@business.legal_person_photo)) %>
 		</div>
 	</div>
 	<div class="profile-info-row center">
