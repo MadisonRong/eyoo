@@ -38,7 +38,6 @@ class TicketsController < ApplicationController
     case params[:oper]
     when "add"
       admin_ids = get_all_admin_id
-      binding.pry
       ticket = Ticket.create!(
         name: params[:name],
         price: params[:price],
