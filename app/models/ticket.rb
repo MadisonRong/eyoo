@@ -34,7 +34,10 @@ class Ticket < ActiveRecord::Base
   # 审核通过商品
   scope :get_pass, ->(id){
     ticket = Ticket.find(id)
-    ticket.update_attribute(:status, 1)
+    ticket.update_attributes({
+      status: 1,
+      status_time: Time.now
+      })
   }
 
   # 获取分页排序的商品列表(不一定通过审核的)

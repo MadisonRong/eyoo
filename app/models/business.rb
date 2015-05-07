@@ -37,7 +37,10 @@ class Business < ActiveRecord::Base
   # 通过审核商家
   scope :get_pass, ->(id){
     business = Business.find(id)
-    business.update_attribute(:business_status, 1)
+    business.update_attributes({
+      business_status: 1,
+      status_time: Time.now
+      })
   }
 
   # 获取分页排序的商家列表
