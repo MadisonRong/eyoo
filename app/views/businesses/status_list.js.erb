@@ -204,9 +204,8 @@ $(".main-content").append("<%= escape_javascript(render('shared/dialog')) %>")
 					buttons.eq(1).prepend('<i class="icon-remove"></i>');
 					$('.ui-jqdialog-title').eq(0).html("审核商家");
 					$('.delmsg').html("你确定要通过审核吗？");
-					console.log($('#dData'));
-					$('#dData').html("<i class=\"icon-trash\"></i>Yes");
-					$('#eData').html("<i class=\"icon-remove\"></i>No");
+					$('#dData').html("<i class=\"icon-trash\"></i>确定");
+					$('#eData').html("<i class=\"icon-remove\"></i>取消");
 				}
 				
 				function style_search_filters(form) {
