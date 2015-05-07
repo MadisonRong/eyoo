@@ -17,7 +17,7 @@ def make_businesses
       password_confirmation: "123456789",
       operating_license: "user.jpg",
       legal_person_name: "lzq",
-      legal_person_photo: "avatar#{rand(4)+1}.png",
+      legal_person_photo: "avatars/avatar#{rand(4)+1}.png",
       business_status: 0,
       admin_id: admin_ids[rand(admin_ids.size)]
     )
