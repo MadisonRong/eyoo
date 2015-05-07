@@ -32,4 +32,5 @@ def get_all_admin_id
                  result_array << admin.id
              end
 	end
+  result_array
 end

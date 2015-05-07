@@ -25,4 +25,5 @@ def get_all_businesses_id
 	businesses.each do |b|
 		result_array << b.id
 	end
+    result_array
 end

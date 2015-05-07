@@ -34,6 +34,7 @@ def get_all_admin_id
                  result_array << admin.id
              end
   end
+  result_array
 end
 
 #创建商家
@@ -3383,6 +3384,7 @@ def get_all_businesses_id
   businesses.each do |b|
     result_array << b.id
   end
+  result_array
 end
 
 # scenic and ticket seed
