@@ -84,7 +84,7 @@ class AdminsController < ApplicationController
       @result = true
     when 'del'
       #delete admin
-      @result=Admin.find(params[:id]).destroy
+      @result=Admin.del_admin(params[:id])
     end
 
     respond_to do |format|
