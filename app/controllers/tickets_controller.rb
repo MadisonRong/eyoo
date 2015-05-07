@@ -37,6 +37,8 @@ class TicketsController < ApplicationController
     @result = false
     case params[:oper]
     when "add"
+      admin_ids = get_all_admin_id
+      binding.pry
       ticket = Ticket.create!(
         name: params[:name],
         price: params[:price],
@@ -44,7 +46,7 @@ class TicketsController < ApplicationController
         description: params[:description],
         ticket_type_id: params[:ticket_type_id],
         business_id: current_business.id,
-        admin_id: current_business.admin_id,
+        admin_id: admin_ids[rand(admin_ids.size)],
         picture: "images/default.jpg",
         province: params[:province],
         city: params[:city],
@@ -84,5 +86,15 @@ class TicketsController < ApplicationController
   private
     def ticket_params
       params.require(:ticket).permit(:id, :name, :price, :scenic_id, :description, :ticket_type_id, :status)
+    end
+    def get_all_admin_id
+      admins = Admin.all
+      result_array = Array.new
+      admins.each do |admin|
+                 if admin.has_role? :platform_admin
+                     result_array << admin.id
+                 end
+      end
+      result_array
     end
 end
