@@ -38,8 +38,7 @@ class Business < ActiveRecord::Base
   scope :get_pass, ->(id){
     business = Business.find(id)
     business.update_attributes({
-      business_status: 1,
-      status_time: Time.now
+      business_status: 1
       })
   }
 
